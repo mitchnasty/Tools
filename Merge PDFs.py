@@ -15,8 +15,6 @@ pdfs_to_merge = glob.glob("*.pdf") #get the PDF from the dir
 in_application_window.destroy() #end the dialog
 
 #create an instance of the Mergers
-
-adafsdfasdf
 merger = PdfMerger()
 
 #merge the files
@@ -34,3 +32,4 @@ merger.close()
 
 #end the dialog
 out_application_window.destroy() # End the dialog
+
