@@ -1,12 +1,22 @@
 import pandas as pd
 import os
-from pathlib import Path, PureWindowsPath
+#from pathlib import Path, PureWindowsPath
+#import glob
+import tkinter as tk #required download package
+from tkinter import filedialog
 
+#create an instance of the pick path dialog where PDFs are
+in_application_window = tk.Tk()
+folder_root = filedialog.askdirectory(parent=in_application_window,
+                                 initialdir=os.getcwd(),
+                                 title="Please select the Box Sync folder where the NBHD style files reside:")
 #Root structure for files
-folder_root = PureWindowsPath("C:\\Users\MBOND4\\Box Sync\\NDDCSNKRS_TEST\\")
+#folder_root = PureWindowsPath("C:\\Users\MBOND4\\Box Sync\\NDDCSNKRS_TEST\\")
 
 #get the list of files in the folder
 dir_list = os.listdir(folder_root)
+
+in_application_window.destroy() #end the dialog
 
 #Create lists
 lst_catalyst = list()
@@ -48,5 +58,13 @@ dt_catalyst2 = dt_catalyst.rename({'STYLE COLOR ': 'PRODUCT_CD', 'NRG COMMENTARY
 dt_inline2 = dt_inline.rename({'MARKETING TYPE' : 'MARKETING_TYPE', 'Marketing Name': 'MARKETING_NAME',
                                'Product Code': 'PRODUCT_CD' }, axis=1)
 
-dt_catalyst2.to_csv(os.path.join(folder_root, 'Catalyst.csv'), index=False)
-dt_inline2.to_csv(os.path.join(folder_root, 'Inline.csv'), index=False)
+# Create an instance of the pick path dialog where the merged PDF needs to go
+out_application_window = tk.Tk()
+folder_out = filedialog.askdirectory(parent=out_application_window,
+                                 initialdir=os.getcwd(),
+                                 title="Please select folder where you want to put the concatenated files:")
+
+dt_catalyst2.to_csv(os.path.join(folder_out, 'Catalyst.csv'), index=False)
+dt_inline2.to_csv(os.path.join(folder_out, 'Inline.csv'), index=False)
+
+in_application_window.destroy() #end the dialog
