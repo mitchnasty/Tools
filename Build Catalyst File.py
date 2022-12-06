@@ -67,4 +67,4 @@ folder_out = filedialog.askdirectory(parent=out_application_window,
 dt_catalyst2.to_csv(os.path.join(folder_out, 'Catalyst.csv'), index=False)
 dt_inline2.to_csv(os.path.join(folder_out, 'Inline.csv'), index=False)
 
-in_application_window.destroy() #end the dialog
+#in_application_window.destroy() #end the dialog
